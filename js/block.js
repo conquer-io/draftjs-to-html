@@ -333,8 +333,11 @@ function getEntityMarkup(
   }
   if (entity.type === 'IMAGE') {
     const { alignment } = entity.data;
-    if (alignment && alignment.length) {
-      return `<div style="text-align:${alignment};"><img src="${entity.data.src}" alt="${entity.data.alt}" style="height: ${entity.data.height};width: ${entity.data.width}"/></div>`;
+    if (entity.data.link && alignment && alignment.length) {
+      return `<div style="text-align:${alignment};"><a href="${entity.data.link}" target="_blank"><img src="${entity.data.src}" alt="${entity.data.alt}" style="height: ${entity.data.height};width: ${entity.data.width}"/><a/></div>`;
+    }
+    if (entity.data.link) {
+      return `<a href="${entity.data.link}" target="_blank"><img src="${entity.data.src}" alt="${entity.data.alt}" style="height: ${entity.data.height};width: ${entity.data.width}"/></a>`;
     }
     return `<img src="${entity.data.src}" alt="${entity.data.alt}" style="height: ${entity.data.height};width: ${entity.data.width}"/>`;
   }
